@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Danh </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href='/css/style.css'>
+</head>
+
+<body>
+
+    <div class="d-flex justify-content-between">
+        <!-- SIDE BAR -->
+        <div id="side-bar">
+            <div class="logo">ADMIN PAGE</div>
+            <ul class="list-group rounded-0">
+                <li class="dashboard">DASHBOARD</li>
+                <li>
+                 <a th:href="@{/user/user-list}">
+                        <i class="fa fa-user mr-2"></i> Quản lý thành viên
+                    </a>
+                </li>
+                <li>
+                      <a th:href="@{/role/role-list}">
+                        <i class="fa fa-book mr-2"></i> Quản lý quyền
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="admin-wrapper">
+            <!-- HEADER -->
+            <nav class="navbar navbar-expand-sm navbar-light bg-light w-100">
+                <a class="navbar-brand" href="#"><i class="fa fa-align-justify"></i></a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                    data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation"></button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdownId"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cybersoft
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownId">
+                                 <a class="dropdown-item" th:href="@{/admin/logout}">Thoát</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- CONTENT -->
+             <input type="hidden" id="message" th:value="${session.message}"/>
+            <section id="admin-content" class="p-3">
+                <h3 class="mb-3">Danh sách quyền</h3>
+                <div class="row">
+                    <div class="col-md-8">
+                        <a href="role-add" class="btn btn-primary">Thêm mới</a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên Quyền</th>
+                            <th>Mô Tả</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tBody">
+                      <th:block th:each="role : ${roles}">
+                        <tr>
+                            <td th:text=${role.id}></td>
+                            <td th:text=${role.name}>ROLE_ADMIN</td>
+                            <td th:text=${role.description}>Quản trị hệ thống</td>
+                            <td>
+                                <a th:href="@{role-edit?id={id}(id=${role.id})}" class="btn btn-sm btn-info">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </a>
+                                <a th:href="@{role-delete?id={id}(id=${role.id})}" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                          </tr>
+                          </th:block>
+
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="/js/jquery.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  	<script src="/js/icon.js"></script>
+	<script src="/js/sweet.js"></script>
+	<script src="/js/success.js"></script>
+
+</body>
+
+</html>
